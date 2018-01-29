@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Doggy</string>
+    <string name="formulaire1">Vous recherchez un :</string>
+    <string name="formulaire2">Prendre une photo</string>
+    <string name="valider">Valider !</string>
+    <string name="like">J adore !</string>
+    <string name="dislike">Nope !</string>
+
+    <string-array name="dogs_race">
+        <item>pug</item>
+        <item>shiba</item>
+        <item>stbernard</item>
+        <item>corgi</item>
+        <item>bulldog</item>
+        <item>boxer</item>
+        <item>pitbull</item>
+        <item>rottweiler</item>
+        <item>retriever</item>
+        <item>papillon</item>
+        <item>husky</item>
+        <item>tibetan</item>
+        <item>akita</item>
+        <item>beagle</item>
+        <item>bluetick</item>
+        <item>african</item>
+    </string-array>
+
+    <string-array name="dogs_name">
+        <item>Leon</item>
+        <item>Kyubi</item>
+        <item>Robert</item>
+        <item>Kirikou</item>
+    </string-array>
+</resources>
