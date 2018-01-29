@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Doggy</string>
     <string name="formulaire1">Vous recherchez un :</string>
-    <string name="formulaire2">Prendre une photo</string>
+    <string name="takePicture">Prendre une photo</string>
     <string name="valider">Valider !</string>
     <string name="like">J adore !</string>
     <string name="dislike">Nope !</string>

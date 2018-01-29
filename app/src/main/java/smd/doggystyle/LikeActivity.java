@@ -84,7 +84,6 @@ public class LikeActivity extends AppCompatActivity {
                 InputStream is = connection.getInputStream();
                 Gson gson = new Gson();
                 Log.i("test gson ", "gson instancié");
-                //jsonDatas = gson.fromJson(new InputStreamReader(is), new TypeToken<List<Url>>(){}.getType());
 
                 jsonDatas =  new Gson().fromJson( new InputStreamReader(is) , new TypeToken<Url>(){}.getType());
                 Log.i("jsonDatas => ", jsonDatas == null ? "null" : "données extraites du Json !");
