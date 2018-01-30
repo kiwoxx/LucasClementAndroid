@@ -6,6 +6,9 @@
     <string name="valider">Valider !</string>
     <string name="like">J adore !</string>
     <string name="dislike">Nope !</string>
+    <string name="dislike_confirm">vous ne l aimez vraiment pas ? :(</string>
+    <string name="love_confirm">vous avez like !</string>
+
 
     <string-array name="dogs_race">
         <item>pug</item>
@@ -31,5 +34,21 @@
         <item>Kyubi</item>
         <item>Robert</item>
         <item>Kirikou</item>
+        <item>Max</item>
+        <item>Dobby</item>
+        <item>Jon</item>
+        <item>Gandalf</item>
+        <item>Noisette</item>
+        <item>Carl</item>
+        <item>Felix</item>
+        <item>Leo</item>
+        <item>Nougat</item>
+        <item>Tosca</item>
+        <item>Whisky</item>
+        <item>Mika</item>
+        <item>Youka</item>
+        <item>Gummy</item>
+        <item>Titan</item>
+        <item>Yoda</item>
     </string-array>
 </resources>

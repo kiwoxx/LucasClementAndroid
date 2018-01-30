@@ -1,9 +1,12 @@
 package smd.doggystyle;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
@@ -38,6 +43,10 @@ public class LikeActivity extends AppCompatActivity {
         TextView nomRace = (TextView)findViewById(R.id.nomRace);
         nomRace.setText(extras.getString("dogRace"));
         dogNumber = extras.containsKey("dogNumber") ? extras.getInt("dogNumber") : 0;
+        String[] dogNames = getResources().getStringArray(R.array.dogs_name);
+        String dogName = dogNames[dogNumber];
+        String description = dogName + ", " + extras.getString("dogRace");
+        nomRace.setText(description);
         Log.i("dogNumber => ", "numero " + dogNumber);
         try {
             urlJsonRandomImage = new URL("https://dog.ceo/api/breed/"+extras.getString("dogRace")+"/images");
@@ -118,6 +127,11 @@ public class LikeActivity extends AppCompatActivity {
         likeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                Context context = getApplicationContext();
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, R.string.love_confirm, duration);
+                toast.show();
+
                 Intent gameActivity = new Intent(LikeActivity.this, LikeActivity.class);
                 gameActivity.putExtra("dogRace", getIntent().getExtras().getString("dogRace"));
                 gameActivity.putExtra("dogNumber", dogNumber + 1);
@@ -129,10 +143,19 @@ public class LikeActivity extends AppCompatActivity {
         dislikeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent gameActivity = new Intent(LikeActivity.this, LikeActivity.class);
-                gameActivity.putExtra("dogRace", getIntent().getExtras().getString("dogRace"));
-                gameActivity.putExtra("dogNumber", dogNumber + 1);
-                startActivity(gameActivity);
+                AlertDialog.Builder builder = new AlertDialog.Builder(LikeActivity.this);
+                builder.setMessage(R.string.dislike_confirm)
+                        .setCancelable(true)
+                        .setPositiveButton("Yeah :(", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent gameActivity = new Intent(LikeActivity.this, LikeActivity.class);
+                                gameActivity.putExtra("dogRace", getIntent().getExtras().getString("dogRace"));
+                                gameActivity.putExtra("dogNumber", dogNumber + 1);
+                                startActivity(gameActivity);
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
     }

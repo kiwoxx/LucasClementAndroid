@@ -1,8 +1,10 @@
 package smd.doggystyle;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         _secondAppliButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+
                 Intent gameActivity = new Intent(MainActivity.this, LikeActivity.class);
                 gameActivity.putExtra("dogRace", spinner.getSelectedItem().toString());
                 startActivity(gameActivity);

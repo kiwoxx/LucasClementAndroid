@@ -5,6 +5,10 @@
     <string name="valider">let s go !</string>
     <string name="like">love it :)</string>
     <string name="dislike">Nope :(</string>
+    <string name="dislike_confirm">U really don t like ? :(</string>
+    <string name="love_confirm">u loved him</string>
+
+
 
     <string-array name="dogs_race">
         <item>pug</item>
@@ -30,6 +34,22 @@
         <item>Kyubi</item>
         <item>Robert</item>
         <item>Kirikou</item>
+        <item>Max</item>
+        <item>Dobby</item>
+        <item>Jon</item>
+        <item>Gandalf</item>
+        <item>Noisette</item>
+        <item>Carl</item>
+        <item>Felix</item>
+        <item>Leo</item>
+        <item>Nougat</item>
+        <item>Tosca</item>
+        <item>Whisky</item>
+        <item>Mika</item>
+        <item>Youka</item>
+        <item>Gummy</item>
+        <item>Titan</item>
+        <item>Yoda</item>
     </string-array>
 
 </resources>
