@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Doggy Style</string>
+    <string name="app_name">Doggy</string>
     <string name="formulaire1">You are looking for a :</string>
     <string name="takePicture">take a pic !</string>
     <string name="valider">let s go !</string>

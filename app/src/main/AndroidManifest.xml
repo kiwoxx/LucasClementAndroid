@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -27,7 +27,7 @@
         <activity
             android:name=".ListLikesActivity"
             android:label="@string/title_activity_list_likes"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 
 </manifest>

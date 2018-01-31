@@ -1,5 +1,9 @@
 package smd.doggystyle;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,20 +34,64 @@ import java.net.URL;
 
 public class LikeActivity extends AppCompatActivity {
     ImageView dogImage;
-    Url jsonDatas;
-    URL urlJsonRandomImage = null;
-    Button likeButton;
-    Button dislikeButton;
-    int dogNumber;
+    Url       jsonDatas;
+    URL       urlJsonRandomImage = null;
+    Button    likeButton;
+    Button    dislikeButton;
+    int       dogNumber;
+    TextView  nomRace;
+    Toolbar   toolbar;
+    Bundle    extras;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_like);
-        loadComponents();
-        addListeners();
-        Bundle extras = getIntent().getExtras();
-        TextView nomRace = (TextView)findViewById(R.id.nomRace);
+    private void loadComponents() {
+        likeButton    = findViewById(R.id.buttonLike);
+        dislikeButton = findViewById(R.id.buttonDislike);
+        nomRace       = (TextView)findViewById(R.id.nomRace);
+        dogImage      = (ImageView) findViewById(R.id.imageView1);
+        toolbar       = (Toolbar) findViewById(R.id.my_toolbar);
+    }
+
+    private void addListeners(){
+        likeButton.setClickable(true);
+        likeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Context context = getApplicationContext();
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, R.string.love_confirm, duration);
+                toast.show();
+
+                Intent gameActivity = new Intent(LikeActivity.this, LikeActivity.class);
+                gameActivity.putExtra("dogRace", getIntent().getExtras().getString("dogRace"));
+                gameActivity.putExtra("dogNumber", dogNumber + 1);
+                startActivity(gameActivity);
+                createNotify();
+                finish();
+            }
+        });
+
+        dislikeButton.setClickable(true);
+        dislikeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                AlertDialog.Builder builder = new AlertDialog.Builder(LikeActivity.this);
+                builder.setMessage(R.string.dislike_confirm)
+                        .setCancelable(true)
+                        .setPositiveButton("Yeah :(", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent gameActivity = new Intent(LikeActivity.this, LikeActivity.class);
+                                gameActivity.putExtra("dogRace", getIntent().getExtras().getString("dogRace"));
+                                gameActivity.putExtra("dogNumber", dogNumber + 1);
+                                startActivity(gameActivity);
+                                finish();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
+
+        extras = getIntent().getExtras();
         nomRace.setText(extras.getString("dogRace"));
         dogNumber = extras.containsKey("dogNumber") ? extras.getInt("dogNumber") : 0;
         String[] dogNames = getResources().getStringArray(R.array.dogs_name);
@@ -51,6 +99,17 @@ public class LikeActivity extends AppCompatActivity {
         String description = dogName + ", " + extras.getString("dogRace");
         nomRace.setText(description);
         Log.i("dogNumber => ", "numero " + dogNumber);
+
+        setSupportActionBar(toolbar);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_like);
+        loadComponents();
+        addListeners();
+
         try {
             urlJsonRandomImage = new URL("https://dog.ceo/api/breed/"+extras.getString("dogRace")+"/images");
         } catch (MalformedURLException e) {
@@ -58,11 +117,6 @@ public class LikeActivity extends AppCompatActivity {
         }
         DownloadJsonTask downloadJsonTask = new DownloadJsonTask();
         downloadJsonTask.execute(urlJsonRandomImage);
-
-        dogImage = (ImageView) findViewById(R.id.imageView1);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(toolbar);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -137,46 +191,33 @@ public class LikeActivity extends AppCompatActivity {
         }
     }
 
-    private void loadComponents() {
-        likeButton    = findViewById(R.id.buttonLike);
-        dislikeButton = findViewById(R.id.buttonDislike);
-    }
+    private void createNotify(){
+        Notification notification ;
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-    private void addListeners(){
-        likeButton.setClickable(true);
-        likeButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Context context = getApplicationContext();
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, R.string.love_confirm, duration);
-                toast.show();
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("default",
+                    "DoggyChannel",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("Channel for doggy likes");
+            manager.createNotificationChannel(channel);
+        }
 
-                Intent gameActivity = new Intent(LikeActivity.this, LikeActivity.class);
-                gameActivity.putExtra("dogRace", getIntent().getExtras().getString("dogRace"));
-                gameActivity.putExtra("dogNumber", dogNumber + 1);
-                startActivity(gameActivity);
-            }
-        });
+        Notification.Builder builder = new Notification.Builder(LikeActivity.this, "default");
+        Intent intent = new Intent("com.rj.notitfications.SECACTIVITY");
+        PendingIntent pendingIntent = PendingIntent.getActivity(LikeActivity.this, 1, intent, 0);
 
-        dislikeButton.setClickable(true);
-        dislikeButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                AlertDialog.Builder builder = new AlertDialog.Builder(LikeActivity.this);
-                builder.setMessage(R.string.dislike_confirm)
-                        .setCancelable(true)
-                        .setPositiveButton("Yeah :(", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Intent gameActivity = new Intent(LikeActivity.this, LikeActivity.class);
-                                gameActivity.putExtra("dogRace", getIntent().getExtras().getString("dogRace"));
-                                gameActivity.putExtra("dogNumber", dogNumber + 1);
-                                startActivity(gameActivity);
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
-        });
+        builder.setAutoCancel(false);
+        builder.setTicker("Love added");
+        builder.setContentTitle("new love added");
+        builder.setContentText("find him in your love list");
+        builder.setSmallIcon(R.drawable.ic_love);
+        builder.setContentIntent(pendingIntent);
+        builder.setOngoing(true);
+        builder.setNumber(100);
+        builder.build();
+
+        notification = builder.getNotification();
+        manager.notify(11, notification);
     }
 }

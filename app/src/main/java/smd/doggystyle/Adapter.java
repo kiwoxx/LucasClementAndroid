@@ -75,7 +75,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
         public void display(Pair<String, Bitmap> pair) {
             currentPair = pair;
             name.setText(pair.first);
-            image.setImageBitmap(pair.second);
+            image.setImageBitmap(Bitmap.createScaledBitmap(pair.second, 800, 600, false));
         }
     }
 }

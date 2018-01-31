@@ -4,6 +4,6 @@
 
     <item android:title="@string/like"
         android:id="@+id/menuButton"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_cart"
         app:showAsAction="ifRoom"/>
 </menu>

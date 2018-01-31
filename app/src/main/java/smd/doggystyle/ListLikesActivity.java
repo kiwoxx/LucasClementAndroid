@@ -25,8 +25,11 @@ import java.util.List;
 
 public class ListLikesActivity extends AppCompatActivity {
 
-    List<Pair<String, Bitmap>> likedDogs;
+    List<Pair<String, URL>> likedDogs;
+    List<Pair<String, Bitmap>> listNamesImages;
     RecyclerView rv;
+    int likeCount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,34 +37,33 @@ public class ListLikesActivity extends AppCompatActivity {
 
         rv = (RecyclerView) findViewById(R.id.list);
         rv.setLayoutManager(new LinearLayoutManager(this));
-
-        URL urlJsonRandomImage = null;
+        listNamesImages = new ArrayList<>();
         try {
-            urlJsonRandomImage = new URL("https://dog.ceo//api//img//pomeranian//n02112018_1611.jpg");
+            likedDogs = new ArrayList<>();
+            likedDogs.add(new Pair<String, URL>("bob", new URL("https://dog.ceo//api//img//pomeranian//n02112018_1611.jpg")));
+            likedDogs.add(new Pair<String, URL>("max", new URL("https://dog.ceo//api//img//redbone//n02090379_1020.jpg")));
+            likedDogs.add(new Pair<String, URL>("nasus", new URL("https://dog.ceo//api//img//terrier-australian//n02096294_2206.jpg")));
+            likedDogs.add(new Pair<String, URL>("napoleon", new URL("https://dog.ceo//api//img//eskimo//n02109961_2609.jpg")));
+            likedDogs.add(new Pair<String, URL>("freddy", new URL("https://dog.ceo//api//img//sheepdog-english//n02105641_9289.jpg")));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        likedDogs = new ArrayList<>();
         DownloadRandomImagesTask imageDownloader = new DownloadRandomImagesTask();
-        imageDownloader.execute(urlJsonRandomImage);
+        likeCount = 0;
+        imageDownloader.execute();
     }
 
     public class DownloadRandomImagesTask extends AsyncTask<URL, Integer, Long> {
 
         protected Long doInBackground(URL... urls) {
             try {
-                HttpURLConnection connection = (HttpURLConnection) urls[0].openConnection();
+                HttpURLConnection connection = (HttpURLConnection) likedDogs.get(likeCount).second.openConnection();
                 InputStream inputStream = connection.getInputStream();
                 final Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        likedDogs.add(new Pair<String, Bitmap>("bob", bitmap));
-                        likedDogs.add(new Pair<String, Bitmap>("bob", bitmap));
-                        likedDogs.add(new Pair<String, Bitmap>("bob", bitmap));
-                        likedDogs.add(new Pair<String, Bitmap>("bob", bitmap));
-                        Adapter adapter = new Adapter(likedDogs);
-                        rv.setAdapter(adapter);
+                        listNamesImages.add(new Pair<String, Bitmap>(likedDogs.get(likeCount).first, bitmap));
                     }
                 });
             } catch (MalformedURLException e) {
@@ -74,7 +76,14 @@ public class ListLikesActivity extends AppCompatActivity {
         protected void onProgressUpdate(Integer... progress) {
         }
         protected void onPostExecute(Long result) {
-            Log.i("Downloaded ", "result" + result);
+            DownloadRandomImagesTask imageDownloader = new DownloadRandomImagesTask();
+            likeCount += 1;
+            if(likeCount == 5){
+                Adapter adapter = new Adapter(listNamesImages);
+                rv.setAdapter(adapter);
+            } else {
+                imageDownloader.execute();
+            }
         }
     }
 }
