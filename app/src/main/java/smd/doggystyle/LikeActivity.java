@@ -10,11 +10,14 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -44,7 +47,7 @@ public class LikeActivity extends AppCompatActivity {
         nomRace.setText(extras.getString("dogRace"));
         dogNumber = extras.containsKey("dogNumber") ? extras.getInt("dogNumber") : 0;
         String[] dogNames = getResources().getStringArray(R.array.dogs_name);
-        String dogName = dogNames[dogNumber];
+        String dogName = dogNames[dogNumber] == null ? dogNames[1] : dogNames[dogNumber];
         String description = dogName + ", " + extras.getString("dogRace");
         nomRace.setText(description);
         Log.i("dogNumber => ", "numero " + dogNumber);
@@ -57,6 +60,23 @@ public class LikeActivity extends AppCompatActivity {
         downloadJsonTask.execute(urlJsonRandomImage);
 
         dogImage = (ImageView) findViewById(R.id.imageView1);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuButton:
+                Intent listLikesActivity = new Intent(LikeActivity.this, ListLikesActivity.class);
+                startActivity(listLikesActivity);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public class DownloadImageTask extends AsyncTask<URL, Integer, Long> {

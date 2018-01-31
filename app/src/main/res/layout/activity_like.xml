@@ -10,24 +10,25 @@
     <TextView
         android:id="@+id/nomRace"
         android:layout_width="383dp"
-        android:layout_height="91dp"
+        android:layout_height="77dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:textSize="30sp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
         tools:layout_editor_absoluteX="1dp" />
 
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="382dp"
-        android:layout_height="329dp"
+        android:layout_height="293dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:contentDescription="@string/app_name"
         android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/buttonLike"
         app:layout_constraintTop_toBottomOf="@+id/nomRace"
-        tools:layout_editor_absoluteX="2dp" />
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="1dp" />
 
     <Button
         android:id="@+id/buttonDislike"
@@ -49,5 +50,13 @@
         android:text="@string/like"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
 </android.support.constraint.ConstraintLayout>

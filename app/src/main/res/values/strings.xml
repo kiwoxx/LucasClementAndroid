@@ -7,7 +7,7 @@
     <string name="dislike">Nope :(</string>
     <string name="dislike_confirm">U really don t like ? :(</string>
     <string name="love_confirm">u loved him</string>
-
+    <string name="action_settings">options</string>
 
 
     <string-array name="dogs_race">
@@ -51,5 +51,6 @@
         <item>Titan</item>
         <item>Yoda</item>
     </string-array>
+    <string name="title_activity_list_likes">ListLikesActivity</string>
 
 </resources>
