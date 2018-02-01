@@ -65,7 +65,7 @@ public class LikeActivity extends AppCompatActivity {
                 gameActivity.putExtra("dogRace", getIntent().getExtras().getString("dogRace"));
                 gameActivity.putExtra("dogNumber", dogNumber + 1);
                 startActivity(gameActivity);
-                createNotify();
+                //createNotify();
                 finish();
             }
         });
@@ -129,6 +129,9 @@ public class LikeActivity extends AppCompatActivity {
                 Intent listLikesActivity = new Intent(LikeActivity.this, ListLikesActivity.class);
                 startActivity(listLikesActivity);
                 return true;
+            case R.id.RetourButton:
+                finish();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -165,7 +168,6 @@ public class LikeActivity extends AppCompatActivity {
             try {
                 HttpURLConnection connection = (HttpURLConnection) urls[0].openConnection();
                 InputStream is = connection.getInputStream();
-                Gson gson = new Gson();
                 Log.i("test gson ", "gson instancié");
 
                 jsonDatas =  new Gson().fromJson( new InputStreamReader(is) , new TypeToken<Url>(){}.getType());
@@ -190,7 +192,7 @@ public class LikeActivity extends AppCompatActivity {
             }
         }
     }
-
+/*
     private void createNotify(){
         Notification notification ;
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -220,4 +222,5 @@ public class LikeActivity extends AppCompatActivity {
         notification = builder.getNotification();
         manager.notify(11, notification);
     }
+    */
 }

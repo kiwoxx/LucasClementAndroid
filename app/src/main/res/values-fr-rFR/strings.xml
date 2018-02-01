@@ -8,6 +8,7 @@
     <string name="dislike">Nope !</string>
     <string name="dislike_confirm">vous ne l aimez vraiment pas ? :(</string>
     <string name="love_confirm">vous avez like !</string>
+    <string name="retour">Retour</string>
 
 
     <string-array name="dogs_race">
@@ -21,7 +22,6 @@
         <item>retriever</item>
         <item>papillon</item>
         <item>husky</item>
-        <item>tibetan</item>
         <item>akita</item>
         <item>beagle</item>
         <item>bluetick</item>
@@ -49,5 +49,17 @@
         <item>Gummy</item>
         <item>Titan</item>
         <item>Yoda</item>
+        <item>Nicolas</item>
+        <item>Karlos</item>
+        <item>Bob</item>
+        <item>Boris</item>
+        <item>Thrall</item>
+        <item>Timmy</item>
+        <item>Ted</item>
+        <item>Caramel</item>
+        <item>Nutella</item>
+        <item>Jorge</item>
+        <item>Carapuce</item>
+        <item>Cachou</item>
     </string-array>
 </resources>

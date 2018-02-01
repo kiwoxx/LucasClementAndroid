@@ -8,6 +8,7 @@
     <string name="dislike_confirm">U really don t like ? :(</string>
     <string name="love_confirm">u loved him</string>
     <string name="action_settings">options</string>
+    <string name="retour">go back</string>
 
 
     <string-array name="dogs_race">
@@ -21,7 +22,6 @@
         <item>retriever</item>
         <item>papillon</item>
         <item>husky</item>
-        <item>tibetan</item>
         <item>akita</item>
         <item>beagle</item>
         <item>bluetick</item>
@@ -49,6 +49,18 @@
         <item>Gummy</item>
         <item>Titan</item>
         <item>Yoda</item>
+        <item>Nicolas</item>
+        <item>Karlos</item>
+        <item>Bob</item>
+        <item>Boris</item>
+        <item>Thrall</item>
+        <item>Timmy</item>
+        <item>Ted</item>
+        <item>Caramel</item>
+        <item>Nutella</item>
+        <item>Jorge</item>
+        <item>Carapuce</item>
+        <item>Cachou</item>
     </string-array>
     <string name="title_activity_list_likes">ListLikesActivity</string>
 

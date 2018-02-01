@@ -6,4 +6,8 @@
         android:id="@+id/menuButton"
         android:icon="@drawable/ic_cart"
         app:showAsAction="ifRoom"/>
+    <item android:title="@string/retour"
+        android:id="@+id/RetourButton"
+        android:icon="@drawable/ic_retour"
+        app:showAsAction="ifRoom"/>
 </menu>
